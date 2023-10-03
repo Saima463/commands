@@ -1,0 +1,33 @@
+Stop the MySQL Server: 
+sudo /etc/init.d/mysql stop
+(In some cases, if /var/run/mysqld doesn't exist, you have to create it at first: sudo mkdir -v /var/run/mysqld && sudo chown mysql /var/run/mysqld
+Start the mysqld configuration: sudo mysqld --skip-grant-tables &
+Login to MySQL as root: mysql -u root mysql
+Replace YOURNEWPASSWORD with your new password:
+
+
+For MySQL < 8.0
+
+UPDATE mysql.user SET Password = PASSWORD('YOURNEWPASSWORD') WHERE User = 'root';
+FLUSH PRIVILEGES;
+
+
+If your MySQL uses new auth plugin, you will need to use: update user set plugin="mysql_native_password" where User='root'; before flushing privileges.
+
+Note: on some versions, if password column doesn't exist, you may want to try:
+UPDATE user SET authentication_string=password('YOURNEWPASSWORD') WHERE user='root';
+
+Note: This method is not regarded as the most secure way of resetting the password, however, it works.
+
+
+
+
+For MySQL >= 8.0
+
+update user set plugin="mysql_native_password" where User='root';
+FLUSH PRIVILEGES;
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'f18bb012.';
+FLUSH PRIVILEGES;
+
+ps -aux | grep mysql
+kill process
