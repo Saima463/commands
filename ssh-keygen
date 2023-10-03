@@ -1,0 +1,8 @@
+On new user generate key,
+
+ssh-keygen -t rsa -b 4096 
+cat id_rsa.pub > authorized_keys
+chmod 600 authorized_keys
+
+Copy private key to new file and login using that private key.
+

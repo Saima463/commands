@@ -1,0 +1,70 @@
+ctrl p q ( to exit out of container)
+docker container rm (docker ls -aq)
+docker container top id
+docker container inspect id
+docker container logs id
+docker container stats 
+docker container attach id (to attach to running container)
+docker container kill id
+docker container wait id
+docker container pause id
+docker container unpause id
+docker container port
+docker container prune
+docker container diff
+docker container cp test id:/tmp/
+docker container export id>filename   ,, docker image save > file.tar ( save will save all layers of images and export will save only specified layer )
+doccker image import filename containername  ,, docker image load < file.tar 
+docker image ls
+docker container commit --author "" -m "" containerid imagename
+docker image ls --format '{{.ID}} , {{.Repository}} , {{.Tag}}'
+docker image rm -f id
+docker rmi namw:10.04
+docker pull image
+docker run image
+docker run -d idconrtainer ( to run in dettach mode)
+docker exec containername command
+docker run -it id /bin/bash
+
+docker image build -t tag .
+docker run -v yourdir:dockerdirect containerid
+
+
+
+networks
+bridge (defualt network) (docker only create one network in docker host ny default) (docker has a built in dns server with ip 127.0.0.11 that helps the conatiner to resolve the network using the container names, it uses network internet spaces each container has seperate internt space and connect through virtual ethernet pairs)
+host (network must be specified)
+none (network must be specified)
+
+docker run --name webapp -p 38080:8080 -d -e DB_Host=mysql-db -e DB_Password=db_pass123 --network=wp-mysql-network --link webapp:webapp kodekloud/simple-webapp-mysql
+docker run -d --name my-registry -p 5000:5000 --restart=always registry:2
+
+
+Dockerfile
+
+In cmd, the command line arguments will pass entirely. Whereas, in entrypont the command line arguments iwll get appended
+
+
+Docker Engine:
+
+Docker-Deamon:
+Backgrund process that manages docker objects i.e. images, objects, containers, volumes.
+
+Rest-Api: 
+Api interface that programs can use to talk to deamn and provide instructions.
+
+Docker-cli:
+command line
+
+Docker Engine can be used as a remote using command
+docker -H=10.24.23.24:2375 run nginx
+
+
+
+Namespaces in Docker:
+Docker use a concept of namespaces in which each process indise a container gets a unique process id starting from 1 and in host this id is implemented in such way that process gets incremented id regarding previous processes. 
+
+
+Resources Implementation in Container and HOst:
+Docker uses cgroups or control groups to control the amount of hardware resources allocated to each container.
+docker run --cpus=.5 ubuntu
